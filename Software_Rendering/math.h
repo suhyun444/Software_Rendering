@@ -12,6 +12,7 @@ public:
 	Vector3 operator-(Vector3& v);
 	float Dot(Vector3& v);
 	Vector3 Cross(Vector3& v);
+	Vector3 Normalized();
 };
 class Vector4
 {
