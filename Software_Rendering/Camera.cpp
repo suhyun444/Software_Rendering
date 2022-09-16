@@ -14,7 +14,6 @@ Camera::~Camera()
 
 
 }
-#include <iostream>
 void Camera::SetViewMatrix()
 {
 	viewMatrix = Matrix4x4::GetModelMatrix(Vector3(1, 1, 1), rotation, position).Inverse();

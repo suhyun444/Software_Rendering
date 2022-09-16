@@ -51,14 +51,6 @@ Vector3 Vector3::Cross(Vector3& v)
 {
     return Vector3(y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x);
 }
-Vector3 Vector3::Normalized()
-{
-    int length = sqrtf((x * x) + (y * y) + (z * z));
-    float _x = x / length;
-    float _y = y / length;
-    float _z = z / length;
-    return Vector3(_x, _y, _z);
-}
 
 Vector4::Vector4()
 {
