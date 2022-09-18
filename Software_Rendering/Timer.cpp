@@ -8,6 +8,7 @@ Timer::~Timer()
 {
 
 }
+
 bool Timer::Initialize()
 {
 	QueryPerformanceFrequency((LARGE_INTEGER*)&frequency);

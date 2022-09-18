@@ -24,6 +24,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	}
 	return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
+
 Window::Window(HINSTANCE _hInstance, int _width, int _height, std::wstring _title)
 {
 	hInstance = _hInstance;

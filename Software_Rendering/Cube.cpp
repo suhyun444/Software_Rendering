@@ -22,6 +22,7 @@ Cube::Cube()
 	indices[8]  = Index(1, 0, 4); indices[9]  = Index(1, 4, 5);
 	indices[10] = Index(7, 6, 5); indices[11] = Index(7, 5, 4);
 }
+
 Matrix4x4 Cube::GetModelMatrix()
 {
 	return Matrix4x4::GetModelMatrix(scale, rotation, position);

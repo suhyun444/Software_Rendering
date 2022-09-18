@@ -1,5 +1,6 @@
 #include "math.h"
 #define PI 3.141592
+
 Vector2::Vector2()
 {
     x = 0;

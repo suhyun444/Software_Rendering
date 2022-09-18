@@ -1,6 +1,7 @@
 #pragma once
 #include "math.h"
 #include <Windows.h>
+
 class Cube
 {
 private:

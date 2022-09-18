@@ -19,6 +19,7 @@ void Camera::SetViewMatrix()
 	viewMatrix = Matrix4x4::GetModelMatrix(Vector3(1, 1, 1), rotation, position).Inverse();
 }
 
+
 void Camera::SetProjectionMatrix()
 {
 	float top = nearPlane * tanf(3.1415f / 180 * fov / 2);

@@ -83,6 +83,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLin
 					c.deviceCoordinateVertices[i].y += 1;
 					c.deviceCoordinateVertices[i].y *= (float)window.GetHeight() / 2.0f;
 				}
+
 				Vector4 viewingVector4 = Vector4(0, 0, 1, 0);
 				viewingVector4 = Matrix4x4::GetModelMatrix(Vector3(1, 1, 1), camera.rotation, camera.position) * viewingVector4;
 				Vector3 viewingVector = Vector3(viewingVector4.x, viewingVector4.y, viewingVector4.z);

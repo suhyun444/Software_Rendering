@@ -19,4 +19,3 @@ public:
 	int GetHeight() { return height; }
 	
 };
-
