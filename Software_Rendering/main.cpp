@@ -61,7 +61,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLin
 		}
 		else
 		{
-			if (timer.GetTime() > 1 / 60)
+			if (timer.GetTime() > 1000 / 60)
 			{
 				BitBlt(hdc, 0, 0, window.GetWidth(), window.GetHeight(), 0, 0, 0, WHITENESS);
 				std::cout << timer.GetTime() << "\n";
