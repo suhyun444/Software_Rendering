@@ -1,5 +1,10 @@
 #include "Time.h"
 
+INT64 Time::frequency = 0;
+float Time::ticksPerMs = 0;
+INT64 Time::startTime = 0;
+float Time::frameTime = 0;
+
 bool Time::Initialize()
 {
 	QueryPerformanceFrequency((LARGE_INTEGER *)&frequency);
