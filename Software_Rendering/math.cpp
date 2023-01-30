@@ -11,11 +11,11 @@ Vector2::Vector2(float x, float y)
     this->x = x;
     this->y = y;
 }
-Vector2 Vector2::operator+(Vector2& v)
+Vector2 Vector2::operator+(const Vector2 &v)
 {
     return Vector2(x + v.x, y + v.y);
 }
-Vector2 Vector2::operator-(Vector2& v)
+Vector2 Vector2::operator-(const Vector2 &v)
 {
     return Vector2(x - v.x, y - v.y);
 }
@@ -36,15 +36,25 @@ Vector3::Vector3(float x, float y, float z)
     this->y = y;
     this->z = z;
 }
-Vector3 Vector3::operator+(Vector3& v)
+Vector3 Vector3::operator+(const Vector3 &v)
 {
     return Vector3(x + v.x, y + v.y, z + v.z);
 }
-Vector3 Vector3::operator-(Vector3& v)
+Vector3 Vector3::operator-(const Vector3 &v)
 {
     return Vector3(x - v.x, y - v.y, z + v.z);
 }
-Vector3 Vector3::operator*(float& other)
+Vector3 Vector3::operator+=(const Vector3 &v)
+{
+    *this = *this + v;
+    return *this;
+}
+Vector3 Vector3::operator-=(const Vector3 &v)
+{
+    *this = *this - v;
+    return *this;
+}
+Vector3 Vector3::operator*(float other)
 {
     return Vector3(x * other,y * other,z * other);
 }
@@ -78,11 +88,11 @@ Vector4::Vector4(float x, float y, float z, float w)
     this->z = z;
     this->w = w;
 }
-Vector4 Vector4::operator+(Vector4& v)
+Vector4 Vector4::operator+(const Vector4 &v)
 {
     return Vector4(x + v.x, y + v.y, z + v.z, w + v.w);
 }
-Vector4 Vector4::operator-(Vector4& v)
+Vector4 Vector4::operator-(const Vector4 &v)
 {
     return Vector4(x - v.x, y - v.y, z - v.z, w - v.w);
 }
@@ -108,7 +118,7 @@ Matrix4x4::Matrix4x4(float M11, float M12, float M13, float M14,
 	this->M31 = M31, this->M32 = M32, this->M33 = M33, this->M34 = M34;
     this->M41 = M41, this->M42 = M42, this->M43 = M43, this->M44 = M44;
 }
-Matrix4x4 Matrix4x4::operator+(Matrix4x4& m)
+Matrix4x4 Matrix4x4::operator+(const Matrix4x4 &m)
 {
 	Matrix4x4 ret;
 	ret.M11 = M11 + m.M11; ret.M12 = M12 + m.M12; ret.M13 = M13 + m.M13; ret.M14 = M14 + m.M14;
@@ -117,7 +127,7 @@ Matrix4x4 Matrix4x4::operator+(Matrix4x4& m)
 	ret.M41 = M41 + m.M41; ret.M42 = M42 + m.M42; ret.M43 = M43 + m.M43; ret.M44 = M44 + m.M44;
     return ret;
 }
-Matrix4x4 Matrix4x4::operator-(Matrix4x4& m)
+Matrix4x4 Matrix4x4::operator-(const Matrix4x4 &m)
 {
 	Matrix4x4 ret;
 	ret.M11 = M11 - m.M11; ret.M12 = M12 - m.M12; ret.M13 = M13 - m.M13; ret.M14 = M14 - m.M14;
@@ -126,7 +136,7 @@ Matrix4x4 Matrix4x4::operator-(Matrix4x4& m)
 	ret.M41 = M41 - m.M41; ret.M42 = M42 - m.M42; ret.M43 = M43 - m.M43; ret.M44 = M44 - m.M44;
     return ret;
 }
-Matrix4x4 Matrix4x4::operator*(Matrix4x4 m)
+Matrix4x4 Matrix4x4::operator*(const Matrix4x4 m)
 {
     return Multiply(m);
 }
@@ -148,7 +158,7 @@ Matrix4x4 Matrix4x4::Multiply(Matrix4x4 m)
     ret.M43 = M41 * m.M13 + M42 * m.M23 + M43 * m.M33 + M44 * m.M43; ret.M44 = M41 * m.M14 + M42 * m.M24 + M43 * m.M34 + M44 * m.M44;
     return ret;
 }
-Vector4 Matrix4x4::operator*(Vector4& v)
+Vector4 Matrix4x4::operator*(const Vector4 &v)
 {
     float x = M11 * v.x + M12 * v.y + M13 * v.z + M14 * v.w;
     float y = M21 * v.x + M22 * v.y + M23 * v.z + M24 * v.w;
