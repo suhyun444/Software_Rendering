@@ -2,11 +2,11 @@
 #include "math.h"
 #include "Cube.h"
 #include "Camera.h"
-#include "Timer.h"
+#include "Time.h"
 #include <iostream>
 #include <algorithm>
 #pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
-#define FPS 1000/60
+#define FPS 1/60
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLine, int nCmdShow)
 {
@@ -27,10 +27,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLin
 	cube.rotation = Vector3(-30, -30, 0);
 	cube.position = Vector3(0, 0, 0);
 	
-	Timer timer;
-	if (!timer.Initialize())return 0;
+	if (!Time::Initialize())return 0;
 
-	
 	MSG msg;
 	ZeroMemory(&msg, sizeof(msg));
 	while (msg.message != WM_QUIT)
@@ -41,14 +39,14 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLin
 			DispatchMessage(&msg);
 		}
 		else
-		{	
-			if (timer.GetTime() > FPS)
+		{
+			if (Time::GetDeltaTime() > FPS)
 			{
+				Time::Frame();
 				BitBlt(hdc, 0, 0, Window::width, Window::height, 0, 0, 0, WHITENESS);
 				camera.Update();
 				cube.UpdateTransform(camera);
 				cube.Draw(hdc,camera);
-				timer.Frame();
 			}
 		}
 	}
