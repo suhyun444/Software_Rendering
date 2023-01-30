@@ -10,6 +10,7 @@ public:
 	Vector3(float x, float y, float z);
 	Vector3 operator+(Vector3& v);
 	Vector3 operator-(Vector3& v);
+	Vector3 operator*(float& other);
 	float Dot(Vector3& v);
 	Vector3 Cross(Vector3& v);
 };

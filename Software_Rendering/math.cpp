@@ -44,6 +44,10 @@ Vector3 Vector3::operator-(Vector3& v)
 {
     return Vector3(x - v.x, y - v.y, z + v.z);
 }
+Vector3 Vector3::operator*(float& other)
+{
+    return Vector3(x * other,y * other,z * other);
+}
 float Vector3::Dot(Vector3& v)
 {
     return x * v.x + y * v.y + z * v.z;
