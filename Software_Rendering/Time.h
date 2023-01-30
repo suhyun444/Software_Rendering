@@ -12,5 +12,6 @@ public:
 
 	static bool Initialize();
 	static void Frame();
+	static void Update();
 	static float GetDeltaTime() {return deltaTime;}
 };

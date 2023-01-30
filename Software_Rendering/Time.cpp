@@ -25,12 +25,16 @@ void Time::Frame()
 	INT64 currentTime;
 	QueryPerformanceCounter((LARGE_INTEGER *)&currentTime);
 	startTime = currentTime;
-	float timeDifference;
-
+	return;
+}
+void Time::Update()
+{
+	INT64 currentTime;
 	QueryPerformanceCounter((LARGE_INTEGER *)&currentTime);
+
+	float timeDifference;
 	timeDifference = (float)(currentTime - startTime);
 
 	deltaTime = timeDifference / ticksPerMs;
-	deltaTime /= 1000;
-	return;
+	deltaTime /= 1000.0f;
 }

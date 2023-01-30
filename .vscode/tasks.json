@@ -15,7 +15,7 @@
                 "${fileDirname}\\**.cpp",
                 "-o",
                 "${fileDirname}\\main.exe",
-                "-lgdi32",
+                "-lgdi32"
             ],
             "group": "build",
             "problemMatcher": {
