@@ -7,7 +7,7 @@
 #include <algorithm>
 #pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 
-const float FPS = 1/60;
+const float FPS = 1.0f/60.0f;
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLine, int nCmdShow)
 {
 	Window window = Window(hInstance, 1280, 720, L"SoftwareRendering");
@@ -40,6 +40,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLin
 		}
 		else
 		{
+			Time::Update();
 			if (Time::GetDeltaTime() > FPS)
 			{
 				Time::Frame();

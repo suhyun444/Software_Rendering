@@ -8,9 +8,11 @@ public:
 	float x, y, z;
 	Vector3();
 	Vector3(float x, float y, float z);
-	Vector3 operator+(Vector3& v);
-	Vector3 operator-(Vector3& v);
-	Vector3 operator*(float& other);
+	Vector3 operator+(const Vector3& v);
+	Vector3 operator-(const Vector3 &v);
+	Vector3 operator+=(const Vector3 &v);
+	Vector3 operator-=(const Vector3 &v);
+	Vector3 operator*(float other);
 	float Dot(Vector3& v);
 	Vector3 Cross(Vector3& v);
 };
@@ -22,8 +24,8 @@ public:
 	Vector4();
 	Vector4(float x, float y, float z, float w);
 	Vector4(Vector3 v);
-	Vector4 operator+(Vector4& v);
-	Vector4 operator-(Vector4& v);
+	Vector4 operator+(const Vector4 &v);
+	Vector4 operator-(const Vector4 &v);
 	float Dot(Vector4& v);
 };
 
@@ -33,8 +35,8 @@ public:
 	float x, y;
 	Vector2();
 	Vector2(float x, float y);
-	Vector2 operator+(Vector2& v);
-	Vector2 operator-(Vector2& v);
+	Vector2 operator+(const Vector2& v);
+	Vector2 operator-(const Vector2 &v);
 	float Dot(Vector2& v);
 };
 
@@ -50,11 +52,11 @@ public:
 		float M21, float M22, float M23, float M24,
 		float M31, float M32, float M33, float M34,
 		float M41, float M42, float M43, float M44);
-	Matrix4x4 operator+(Matrix4x4& m);
-	Matrix4x4 operator-(Matrix4x4& m);
-	Matrix4x4 operator*(Matrix4x4 m);
+	Matrix4x4 operator+(const Matrix4x4 &m);
+	Matrix4x4 operator-(const Matrix4x4 &m);
+	Matrix4x4 operator*(const Matrix4x4 m);
 	Matrix4x4 Multiply(Matrix4x4 m);
-	Vector4 operator*(Vector4& v);
+	Vector4 operator*(const Vector4 &v);
 	Matrix4x4 Inverse();
 	static Matrix4x4 Translate(Vector3 position);
 	static Matrix4x4 RotationX(float angle);
