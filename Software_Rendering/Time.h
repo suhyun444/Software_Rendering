@@ -7,10 +7,10 @@ private:
 	static INT64 frequency;
 	static float ticksPerMs;
 	static INT64 startTime;
-	static float frameTime;
+	static float deltaTime;
 public:
 
 	static bool Initialize();
 	static void Frame();
-	static float GetDeltaTime();
+	static float GetDeltaTime() {return deltaTime;}
 };

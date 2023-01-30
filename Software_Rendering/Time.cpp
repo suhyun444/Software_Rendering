@@ -3,7 +3,7 @@
 INT64 Time::frequency = 0;
 float Time::ticksPerMs = 0;
 INT64 Time::startTime = 0;
-float Time::frameTime = 0;
+float Time::deltaTime = 0;
 
 bool Time::Initialize()
 {
@@ -25,18 +25,12 @@ void Time::Frame()
 	INT64 currentTime;
 	QueryPerformanceCounter((LARGE_INTEGER *)&currentTime);
 	startTime = currentTime;
-
-	return;
-}
-
-float Time::GetDeltaTime()
-{
-	INT64 currentTime;
 	float timeDifference;
 
 	QueryPerformanceCounter((LARGE_INTEGER *)&currentTime);
 	timeDifference = (float)(currentTime - startTime);
 
-	frameTime = timeDifference / ticksPerMs;
-	return frameTime / 1000;
+	deltaTime = timeDifference / ticksPerMs;
+	deltaTime /= 1000;
+	return;
 }
