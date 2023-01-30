@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include "Camera.h"
 #include "Window.h"
+#include "Time.h"
 
 
 class Cube

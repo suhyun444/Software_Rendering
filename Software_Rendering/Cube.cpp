@@ -29,7 +29,6 @@ Matrix4x4 Cube::GetModelMatrix()
 }
 void Cube::UpdateTransform(Camera camera)
 {
-	rotation.y += 0.1f;
 	Matrix4x4 t = camera.GetProjectionMatrix() * camera.GetViewMatrix() * Matrix4x4::GetModelMatrix(scale, rotation, position);
 	for (int i = 0; i < 8; i++)
 	{
