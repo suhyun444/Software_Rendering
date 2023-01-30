@@ -16,6 +16,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLin
 		MessageBoxW(nullptr, L"InitializeWindow Failed", L"Error", 0);
 		exit(-1);
 	}
+	if (!Time::Initialize())return 0;
+
 	HDC hdc = GetDC(window.GetHWND());
 
 	//카메라 생성
@@ -26,8 +28,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLin
 	cube.scale = Vector3(1, 1, 1);
 	cube.rotation = Vector3(-30, -30, 0);
 	cube.position = Vector3(0, 0, 0);
-	
-	if (!Time::Initialize())return 0;
 
 	MSG msg;
 	ZeroMemory(&msg, sizeof(msg));
