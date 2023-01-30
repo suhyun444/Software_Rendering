@@ -6,8 +6,8 @@
 #include <iostream>
 #include <algorithm>
 #pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
-#define FPS 1/60
 
+const float FPS = 1/60;
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLine, int nCmdShow)
 {
 	Window window = Window(hInstance, 1280, 720, L"SoftwareRendering");
