@@ -8,6 +8,6 @@ public:
     float b;
     float c;
 
-    ParameterEquation(float p0, float p1, float p2, const EdgeEquation &e0, const EdgeEquation &e1, const EdgeEquation &e2, float area);
+    ParameterEquation(float p1, float p2, float p3, const EdgeEquation &e1, const EdgeEquation &e2, const EdgeEquation &e3, float area);
     float Evaluate(float x, float y);
 };
