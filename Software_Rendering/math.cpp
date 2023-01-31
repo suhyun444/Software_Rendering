@@ -1,5 +1,6 @@
 #include "math.h"
-#define PI 3.141592
+
+const float PI = 3.141592f;
 
 Vector2::Vector2()
 {
