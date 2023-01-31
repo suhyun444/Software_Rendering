@@ -20,7 +20,7 @@ public:
 	Cube();
 	Matrix4x4 GetModelMatrix();
 	void UpdateTransform(const Camera& camera);
-	bool DontNeedToDraw(Vector3 viewingVector, Vector3 p1, Vector3 p2, Vector3 p3);
+	bool DontNeedToDraw(Vector3 viewingVector, int index);
 	void Draw(HDC hdc, const Camera& camera);
 };
 

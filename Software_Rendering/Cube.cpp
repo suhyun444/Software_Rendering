@@ -44,10 +44,10 @@ void Cube::UpdateTransform(const Camera& camera)
 	}
 
 }
-bool Cube::DontNeedToDraw(Vector3 viewingVector,Vector3 p1,Vector3 p2,Vector3 p3)
+bool Cube::DontNeedToDraw(Vector3 viewingVector,int index)
 {
-	Vector3 s1 = p1 - p2;
-	Vector3 s2 = p3 - p2;
+	Vector3 s1 = vertices[indices[index]._1] - vertices[indices[index]._2];
+	Vector3 s2 = vertices[indices[index]._3] - vertices[indices[index]._2];
 	Vector3 normal = s1.Cross(s2);
 	return normal.Dot(viewingVector) < 0;
 }
@@ -56,12 +56,11 @@ void Cube::Draw(HDC hdc, const Camera& camera)
 	for (int i = 0; i < 12; i++)
 	{
 		// back-face culling
+		if(DontNeedToDraw(camera.GetViewingVector(),i))continue;
+
 		Vector3 p1 = deviceCoordinateVertices[indices[i]._1];
 		Vector3 p2 = deviceCoordinateVertices[indices[i]._2];
 		Vector3 p3 = deviceCoordinateVertices[indices[i]._3];
-
-		if(DontNeedToDraw(camera.GetViewingVector(),p1,p2,p3))continue;
-
 		// draw
 		MoveToEx(hdc, p1.x, p1.y, NULL);
 		LineTo(hdc, p2.x, p2.y);
