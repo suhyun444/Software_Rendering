@@ -13,6 +13,7 @@ public:
 	Vector3 operator+=(const Vector3 &v);
 	Vector3 operator-=(const Vector3 &v);
 	Vector3 operator*(float other);
+	Vector3 Reverse();
 	float Dot(Vector3& v);
 	Vector3 Cross(Vector3& v);
 };

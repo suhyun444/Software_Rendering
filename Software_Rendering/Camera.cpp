@@ -70,7 +70,7 @@ void Camera::Move()
 	if(InputController::GetKeyDown(KeyCodeD))position += horizontalVector * 10.0f * Time::GetDeltaTime();
 	if(InputController::GetKeyDown(KeyCodeS))position -= verticalVector * 10.0f * Time::GetDeltaTime();
 	if(InputController::GetKeyDown(KeyCodeW))position += verticalVector * 10.0f * Time::GetDeltaTime();
-	if(InputController::GetKeyDown(KeyCodeE))position -= viewingVector *  10.0f * Time::GetDeltaTime();
+	if(InputController::GetKeyDown(KeyCodeE))position -= viewingVector * 10.0f * Time::GetDeltaTime();
 	if(InputController::GetKeyDown(KeyCodeQ))position += viewingVector * 10.0f * Time::GetDeltaTime();
 
 	if(InputController::GetKeyDown(KeyCodeLeftArrow))rotation.y += 60.0f * Time::GetDeltaTime();

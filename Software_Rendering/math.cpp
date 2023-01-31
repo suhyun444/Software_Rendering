@@ -42,7 +42,7 @@ Vector3 Vector3::operator+(const Vector3 &v)
 }
 Vector3 Vector3::operator-(const Vector3 &v)
 {
-    return Vector3(x - v.x, y - v.y, z + v.z);
+    return Vector3(x - v.x, y - v.y, z - v.z);
 }
 Vector3 Vector3::operator+=(const Vector3 &v)
 {
@@ -57,6 +57,10 @@ Vector3 Vector3::operator-=(const Vector3 &v)
 Vector3 Vector3::operator*(float other)
 {
     return Vector3(x * other,y * other,z * other);
+}
+Vector3 Vector3::Reverse()
+{
+    return Vector3(-x,-y,-z);
 }
 float Vector3::Dot(Vector3& v)
 {
