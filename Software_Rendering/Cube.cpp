@@ -46,8 +46,9 @@ void Cube::UpdateTransform(const Camera& camera)
 }
 bool Cube::DontNeedToDraw(Vector3 viewingVector,int index)
 {
-	Vector3 s1 = vertices[indices[index]._1] - vertices[indices[index]._2];
-	Vector3 s2 = vertices[indices[index]._3] - vertices[indices[index]._2];
+	Vector3 v1 = vertices[indices[index]._1], v2 = vertices[indices[index]._2], v3 = vertices[indices[index]._3];
+	Vector3 s1 = v1 - v2;
+	Vector3 s2 = v3 - v2;
 	Vector3 normal = s1.Cross(s2);
 	return normal.Dot(viewingVector) < 0;
 }
