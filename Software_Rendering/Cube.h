@@ -22,6 +22,6 @@ public:
 	Matrix4x4 GetModelMatrix();
 	void UpdateTransform(const Camera& camera);
 	bool DontNeedToDraw(Vector3 viewingVector, int index);
-	void Draw(HDC hdc, const Camera& camera);
+	void Draw(const HDC& hdc, const Camera& camera);
 };
 
