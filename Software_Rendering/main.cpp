@@ -25,9 +25,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLin
 
 	//큐브 생성
 	Cube cube;
-	cube.scale = Vector3(1, 1, 1);
-	cube.rotation = Vector3(-30, -30, 0);
-	cube.position = Vector3(0, 0, 0);
 
 	MSG msg;
 	ZeroMemory(&msg, sizeof(msg));
@@ -43,6 +40,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLin
 			Time::Update();
 			if (Time::GetDeltaTime() > FPS)
 			{
+				std::cout << camera.position.x << " , " << camera.position.y << " , " << camera.position.z << "\n";
 				Time::Frame();
 				BitBlt(hdc, 0, 0, Window::width, Window::height, 0, 0, 0, WHITENESS);
 				camera.Update();
