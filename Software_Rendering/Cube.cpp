@@ -62,14 +62,7 @@ void Cube::Draw(HDC hdc, const Camera& camera)
 		Vector3 p1 = deviceCoordinateVertices[indices[i]._1];
 		Vector3 p2 = deviceCoordinateVertices[indices[i]._2];
 		Vector3 p3 = deviceCoordinateVertices[indices[i]._3];
-		// draw
-		MoveToEx(hdc, p1.x, p1.y, NULL);
-		LineTo(hdc, p2.x, p2.y);
-
-		MoveToEx(hdc, p2.x, p2.y, NULL);
-		LineTo(hdc, p3.x, p3.y);
-
-		MoveToEx(hdc, p3.x, p3.y, NULL);
-		LineTo(hdc, p1.x, p1.y);
+		
+		Draw::DrawTriangle(hdc,p1,p2,p3);
 	}
 }
