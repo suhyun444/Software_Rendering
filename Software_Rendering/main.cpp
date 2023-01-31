@@ -40,7 +40,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLin
 			Time::Update();
 			if (Time::GetDeltaTime() > FPS)
 			{
-				std::cout << camera.position.x << " , " << camera.position.y << " , " << camera.position.z << "\n";
 				Time::Frame();
 				BitBlt(hdc, 0, 0, Window::width, Window::height, 0, 0, 0, WHITENESS);
 				camera.Update();
