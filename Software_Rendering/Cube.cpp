@@ -27,7 +27,7 @@ Matrix4x4 Cube::GetModelMatrix()
 {
 	return Matrix4x4::GetModelMatrix(scale, rotation, position);
 }
-void Cube::UpdateTransform(Camera camera)
+void Cube::UpdateTransform(const Camera& camera)
 {
 	Matrix4x4 t = camera.GetProjectionMatrix() * camera.GetViewMatrix() * Matrix4x4::GetModelMatrix(scale, rotation, position);
 	for (int i = 0; i < 8; i++)
@@ -51,7 +51,7 @@ bool Cube::DontNeedToDraw(Vector3 viewingVector,Vector3 p1,Vector3 p2,Vector3 p3
 	Vector3 normal = s1.Cross(s2);
 	return normal.Dot(viewingVector) < 0;
 }
-void Cube::Draw(HDC hdc, Camera camera)
+void Cube::Draw(HDC hdc, const Camera& camera)
 {
 	for (int i = 0; i < 12; i++)
 	{

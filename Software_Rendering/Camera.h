@@ -22,11 +22,11 @@ public:
 	~Camera();
 	void Update();
 	void UpdateViewMatrix();
-	Matrix4x4 GetViewMatrix() { return viewMatrix; }
+	Matrix4x4 GetViewMatrix() const { return viewMatrix; }
 	void UpdateProjectionMatrix();
-	Matrix4x4 GetProjectionMatrix() { return projectionMatrix; }
+	Matrix4x4 GetProjectionMatrix() const { return projectionMatrix; }
 	void UpdateViewingVector();
-	Vector3 GetViewingVector() { return viewingVector; }
+	Vector3 GetViewingVector() const { return viewingVector; }
 	void Move();
 };
 
