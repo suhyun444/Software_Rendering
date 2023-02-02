@@ -57,7 +57,7 @@ void Cube::Draw(const HDC& hdc, const Camera& camera)
 	for (int i = 0; i < 12; i++)
 	{
 		// back-face culling
-		if(DontNeedToDraw(camera.GetViewingVector(),i))continue;
+		if(DontNeedToDraw(position -  camera.position,i))continue;
 
 		Vector3 p1 = deviceCoordinateVertices[indices[i]._1];
 		Vector3 p2 = deviceCoordinateVertices[indices[i]._2];
