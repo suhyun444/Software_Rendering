@@ -29,10 +29,15 @@ Matrix4x4 Cube::GetModelMatrix()
 }
 void Cube::UpdateTransform(const Camera& camera)
 {
-	Matrix4x4 t = camera.GetProjectionMatrix() * camera.GetViewMatrix() * Matrix4x4::GetModelMatrix(scale, rotation, position);
+	Matrix4x4 modelMatrix = Matrix4x4::GetModelMatrix(scale, rotation, position);
+	Matrix4x4 t = camera.GetProjectionMatrix() * camera.GetViewMatrix() * modelMatrix;
 	for (int i = 0; i < 8; i++)
 	{
 		Vector4 p = Vector4(vertices[i]);
+		
+		Vector4 vWcs = Matrix4x4::GetModelMatrix(scale, rotation, position) * p;
+		worldCoordinateVertices[i] = Vector3(vWcs.x,vWcs.y,vWcs.z);
+		
 		Vector4 vNdcs = t * p;
 		// Clipping coordinate system -> Normalized device coordinate system
 		deviceCoordinateVertices[i] = Vector3(vNdcs.x / vNdcs.w, vNdcs.y / vNdcs.w, vNdcs.z / vNdcs.w);
@@ -44,9 +49,11 @@ void Cube::UpdateTransform(const Camera& camera)
 	}
 
 }
+// https://velog.io/@jaehyeoksong0/graphics-3
+// TODO : BackfaceCulling 최적화하기
 bool Cube::DontNeedToDraw(Vector3 viewingVector,int index)
 {
-	Vector3 v1 = vertices[indices[index]._1], v2 = vertices[indices[index]._2], v3 = vertices[indices[index]._3];
+	Vector3 v1 = worldCoordinateVertices[indices[index]._1], v2 = worldCoordinateVertices[indices[index]._2], v3 = worldCoordinateVertices[indices[index]._3];
 	Vector3 s1 = v1 - v2;
 	Vector3 s2 = v3 - v2;
 	Vector3 normal = s1.Cross(s2);

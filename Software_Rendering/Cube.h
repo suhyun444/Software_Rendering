@@ -15,6 +15,7 @@ public:
 	Vector3 rotation;
 	Vector3 position;
 	Vector3 vertices[8];
+	Vector3 worldCoordinateVertices[8];
 	Vector3 deviceCoordinateVertices[8];
 	Index indices[12];
 	
