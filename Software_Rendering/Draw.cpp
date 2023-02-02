@@ -28,7 +28,7 @@ void Draw::DrawTriangle(const HDC& hdc,const Vector3 &v1, const Vector3 &v2, con
         {
             if (e1.CheckInside(x, y) && e2.CheckInside(x, y) && e3.CheckInside(x, y))
             {
-                SetPixel(hdc, x, y, RGB(0, 1, 1));
+                SetPixelV(hdc, x, y, RGB(255, 255, 0));
             }
         }
 }
