@@ -54,13 +54,17 @@ void Camera::UpdateViewingVector()
 }
 Vector3 Camera::GetHorizontalVector()
 {
-	Vector3 up = Vector3(0,1,0); 
-	return viewingVector.Cross(up);
+	Vector4 upVector4 = Vector4(0,1,0,0);
+	upVector4 = Matrix4x4::GetModelMatrix(Vector3(1, 1, 1), rotation, position) * upVector4;
+	Vector3 upVector = Vector3(upVector4.x,upVector4.y,upVector4.z);
+	return viewingVector.Cross(upVector);
 }
 Vector3 Camera::GetVerticalVector()
 {
-	Vector3 right = Vector3(1, 0, 0);
-	return viewingVector.Cross(right);
+	Vector4 rightVector4 = Vector4(1, 0, 0, 0);
+	rightVector4 = Matrix4x4::GetModelMatrix(Vector3(1, 1, 1), rotation, position) * rightVector4;
+	Vector3 rightVector = Vector3(rightVector4.x, rightVector4.y, rightVector4.z);
+	return viewingVector.Cross(rightVector);
 }
 void Camera::Move()
 {
