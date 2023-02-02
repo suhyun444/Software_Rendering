@@ -1,7 +1,7 @@
 #pragma once
 #include "Window.h"
 #include "math.h"
-#include "ParameterEquation.h"
+#include "BaryCenterCalculator.h"
 
 class Draw
 {
