@@ -7,7 +7,7 @@
 #include <algorithm>
 #pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 
-const float FPS = 1.0f/60.0f;
+const float FPS = 1.0f/144.0f;
 void DoubleBufferingStart(HDC *hdc, HDC* memDC, HBITMAP *hBit, HBITMAP *oldBit,int x,int y)
 {
 	*memDC = CreateCompatibleDC(*hdc);
@@ -57,6 +57,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLin
 			{
 				DoubleBufferingStart(&hdc,&memDC,&hBit,&oldBit,rect.right,rect.bottom);
 				Time::Frame();
+				char frameBuffer[10];
+				Draw::PrintText(hdc, 5, 5, Time::GetFrameCount(frameBuffer));
 
 				camera.Update();
 				cube.UpdateTransform(camera);

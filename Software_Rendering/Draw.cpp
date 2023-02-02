@@ -1,5 +1,8 @@
 #include "Draw.h"
-
+void Draw::PrintText(const HDC &hdc, const int x, const int y, const LPCTSTR &text)
+{
+    TextOut(hdc,x,y,text,lstrlen(text));
+}
 void Draw::DrawTriangle(const HDC& hdc,const Vector3 &v1, const Vector3 &v2, const Vector3 &v3)
 {
     float minX = Math::Min<float>(Math::Min<float>(v1.x, v2.x), v3.x);
