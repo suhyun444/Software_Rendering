@@ -5,7 +5,7 @@ void Draw::PrintText(const HDC &hdc, const int x, const int y, const LPCTSTR &te
 {
     TextOut(hdc,x,y,text,lstrlen(text));
 }
-void Draw::DrawTriangle(const HDC& hdc,const Vector3 &v1, const Vector3 &v2, const Vector3 &v3)
+void Draw::DrawTriangle(BitmapBuffer &bitmapBuffer, const Vector3 &v1, const Vector3 &v2, const Vector3 &v3)
 {
     float minX = Math::Min<float>(Math::Min<float>(v1.x, v2.x), v3.x);
     float maxX = Math::Max<float>(Math::Max<float>(v1.x, v2.x), v3.x);
@@ -31,10 +31,12 @@ void Draw::DrawTriangle(const HDC& hdc,const Vector3 &v1, const Vector3 &v2, con
             {
                 std::pair<float,float> baryCenter =  baryCenterCalculator.Evaluate(x,y);
                 float sum = baryCenter.first + baryCenter.second;
-                float r = (1 - sum) * 255;
-                float g = baryCenter.first * 255;
-                float b = baryCenter.second * 255;
-                SetPixelV(hdc, x, y, RGB(r, g, b));
+                int a = 255;
+                float r = ((1 - sum) * 255.0f);
+                float g = (baryCenter.first * 255.0f);
+                float b = (baryCenter.second * 255.0f);
+                DWORD color = (a << 24) + ((int)r << 16) + ((int)g << 8) + ((int)b);
+                bitmapBuffer.SetColor(x,y,color);
             }
         }
 }

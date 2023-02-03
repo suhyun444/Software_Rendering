@@ -59,7 +59,7 @@ bool Cube::DontNeedToDraw(Vector3 viewingVector,int index)
 	Vector3 normal = s1.Cross(s2);
 	return normal.Dot(viewingVector) < 0;
 }
-void Cube::Draw(const HDC& hdc, const Camera& camera)
+void Cube::Draw(BitmapBuffer &bitmapBuffer, const Camera &camera)
 {
 	for (int i = 0; i < 12; i++)
 	{
@@ -70,6 +70,6 @@ void Cube::Draw(const HDC& hdc, const Camera& camera)
 		Vector3 p2 = deviceCoordinateVertices[indices[i]._2];
 		Vector3 p3 = deviceCoordinateVertices[indices[i]._3];
 
-		Draw::DrawTriangle(hdc,p1,p2,p3);
+		Draw::DrawTriangle(bitmapBuffer,p1,p2,p3);
 	}
 }
