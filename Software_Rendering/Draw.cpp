@@ -29,10 +29,9 @@ void Draw::DrawTriangle(const HDC& hdc,const Vector3 &v1, const Vector3 &v2, con
         {
             if (e1.CheckInside(x, y) && e2.CheckInside(x, y) && e3.CheckInside(x, y))
             {
-                std::pair<int,int> baryCenter =  baryCenterCalculator.Evaluate(x,y);
-                //std::cout << baryCenter.first << " , " << baryCenter.second << "\n";
+                std::pair<float,float> baryCenter =  baryCenterCalculator.Evaluate(x,y);
                 float sum = baryCenter.first + baryCenter.second;
-                float r = 1 - sum * 255;
+                float r = (1 - sum) * 255;
                 float g = baryCenter.first * 255;
                 float b = baryCenter.second * 255;
                 SetPixelV(hdc, x, y, RGB(r, g, b));

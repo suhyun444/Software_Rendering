@@ -1,5 +1,5 @@
 #include "BaryCenterCalculator.h"
-
+#include <iostream>
 BaryCenterCalculator::BaryCenterCalculator(const Vector3 &v1, const Vector3 &v2, const Vector3 &v3)
 {
     p1 = v1;
@@ -11,7 +11,8 @@ BaryCenterCalculator::BaryCenterCalculator(const Vector3 &v1, const Vector3 &v2,
 std::pair<float,float> BaryCenterCalculator::Evaluate(float x, float y)
 {
     Vector3 w = Vector3(x,y,0) - p1;
-    float s = (((w.Dot(v)) * (u.Dot(v))) - ((w.Dot(u))) * ((v.Dot(v)))) / (((u.Dot(v)) * (u.Dot(v))) - ((v.Dot(v)) * (u.Dot(u))));
-    float t = (((w.Dot(u)) * (u.Dot(v))) - ((w.Dot(v))) * ((u.Dot(u)))) / (((u.Dot(v)) * (u.Dot(v))) - ((v.Dot(v)) * (u.Dot(u))));
+    float a = u.Dot(u), b = u.Dot(v), c = v.Dot(u),d = v.Dot(v), e = u.Dot(w), f = v.Dot(w);
+    float s = ((d * e) - (b * f)) / ((a * d) - (b * c));
+    float t = ((a * f) - (c * e)) / ((a * d) - (b * c));
     return {s,t};
 }
