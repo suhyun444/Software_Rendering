@@ -3,23 +3,12 @@
 #include "Cube.h"
 #include "Camera.h"
 #include "Time.h"
+#include "BitmapBuffer.h"
 #include <iostream>
 #include <algorithm>
 #pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 
 const float FPS = 1.0f/144.0f;
-void DoubleBufferingStart(HDC *hdc, HDC* memDC, HBITMAP *hBit, HBITMAP *oldBit,int x,int y)
-{
-	*memDC = CreateCompatibleDC(*hdc);
-	*hBit = CreateCompatibleBitmap(*hdc,x,y);
-	*oldBit = (HBITMAP)SelectObject(*memDC,*hBit);
-}
-void DoubleBufferingEnd(HDC *memDC,HBITMAP *hBit, HBITMAP *oldBit)
-{
-	SelectObject(*memDC,*oldBit);
-	DeleteDC(*memDC);
-	DeleteObject(*hBit);
-}
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLine, int nCmdShow)
 {
 	Window window = Window(hInstance, 1280, 720, L"SoftwareRendering");
@@ -31,9 +20,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLin
 	if (!Time::Initialize())return 0;
 
 	HDC hdc = GetDC(window.GetHWND());
-	HDC memDC;
-	HBITMAP hBit, oldBit;
-	RECT rect = {0, 0, Window::width, Window::height};
+	BitmapBuffer bitmapBuffer = BitmapBuffer(window.GetHWND(),Window::width,Window::height);
 
 	// 카메라 생성
 	Camera camera = Camera(0.1f, 100, (float)Window::width / (float)Window::height, 70);
@@ -55,22 +42,24 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLin
 			Time::Update();
 			if (Time::GetDeltaTime() > FPS)
 			{
-				DoubleBufferingStart(&hdc,&memDC,&hBit,&oldBit,rect.right,rect.bottom);
+				bitmapBuffer.Clear();
 				Time::Frame();
 				char frameBuffer[10];
-				Draw::PrintText(hdc, 5, 5, Time::GetFrameCount(frameBuffer));
 
 				camera.Update();
 				cube.UpdateTransform(camera);
 				
 				//Draw Start
-				FillRect(memDC,&rect,(HBRUSH)COLOR_WINDOWFRAME);
-				cube.Draw(memDC, camera);
+				Draw::PrintText(hdc, 5, 5, Time::GetFrameCount(frameBuffer));
+
+				Vector3 v1 = Vector3(300, 100, 0.5f), v2 = Vector3(100, 100, 0.5f), v3 = Vector3(200, 200, 0.5f);
+				Draw::DrawTriangle(bitmapBuffer, v1, v2, v3);
+
+				cube.Draw(bitmapBuffer, camera);
 				//Draw End
 
-				BitBlt(hdc, 0, 0, Window::width,Window::height, memDC, 0, 0, SRCCOPY);
 
-				DoubleBufferingEnd(&memDC,&hBit,&oldBit);
+				bitmapBuffer.Draw();
 			}
 		}
 	}
