@@ -51,25 +51,28 @@ void Cube::UpdateTransform(const Camera& camera)
 }
 // https://velog.io/@jaehyeoksong0/graphics-3
 // TODO : BackfaceCulling 최적화하기
-bool Cube::DontNeedToDraw(Vector3 viewingVector,int index)
+bool Cube::DontNeedToDraw(Vector3 viewingVector,Vector3 normalVector)
 {
-	Vector3 v1 = worldCoordinateVertices[indices[index]._1], v2 = worldCoordinateVertices[indices[index]._2], v3 = worldCoordinateVertices[indices[index]._3];
-	Vector3 s1 = v1 - v2;
-	Vector3 s2 = v3 - v2;
-	Vector3 normal = s1.Cross(s2);
-	return normal.Dot(viewingVector) < 0;
+	return normalVector.Dot(viewingVector) > 0;
 }
 void Cube::Draw(BitmapBuffer &bitmapBuffer, const Camera &camera)
 {
+	Vector3 viewingVector = position - camera.position;
 	for (int i = 0; i < 12; i++)
 	{
+		Vector3 v1 = worldCoordinateVertices[indices[i]._1], v2 = worldCoordinateVertices[indices[i]._2], v3 = worldCoordinateVertices[indices[i]._3];
+		Vector3 s1 = v2 - v1;
+		Vector3 s2 = v3 - v1;
+		Vector3 normal = s1.Cross(s2);
+		normal = normal.Normalize();
+		Vector3 viewingVector = position - camera.position;
 		// back-face culling
-		if(DontNeedToDraw(position -  camera.position,i))continue;
+		if (DontNeedToDraw(position - camera.position, normal))	continue;
 
 		Vector3 p1 = deviceCoordinateVertices[indices[i]._1];
 		Vector3 p2 = deviceCoordinateVertices[indices[i]._2];
 		Vector3 p3 = deviceCoordinateVertices[indices[i]._3];
 
-		Draw::DrawTriangle(bitmapBuffer,p1,p2,p3);
+		Draw::DrawTriangle(bitmapBuffer,p1,p2,p3,normal);
 	}
 }

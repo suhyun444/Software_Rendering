@@ -22,7 +22,7 @@ public:
 	Cube();
 	Matrix4x4 GetModelMatrix();
 	void UpdateTransform(const Camera& camera);
-	bool DontNeedToDraw(Vector3 viewingVector, int index);
+	bool DontNeedToDraw(Vector3 viewingVector, Vector3 normalVector);
 	void Draw(BitmapBuffer& bitmapBuffer, const Camera& camera);
 };
 

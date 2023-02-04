@@ -1,11 +1,15 @@
 #include "Draw.h"
 #include <iostream>
 
+float Draw::Ambient = 0.1f;
+Vector3 Draw::DirectionalLight = Vector3(0.0f,-0.5f,1.0f);
+//Vector3 Draw::DirectionalLight = Vector3(0.70f,-0.70f,0.0f);
+
 void Draw::PrintText(const HDC &hdc, const int x, const int y, const LPCTSTR &text)
 {
     TextOut(hdc,x,y,text,lstrlen(text));
 }
-void Draw::DrawTriangle(BitmapBuffer &bitmapBuffer, const Vector3 &v1, const Vector3 &v2, const Vector3 &v3)
+void Draw::DrawTriangle(BitmapBuffer &bitmapBuffer, const Vector3 &v1, const Vector3 &v2, const Vector3 &v3, Vector3 normalVector)
 {
     float minX = Math::Min<float>(Math::Min<float>(v1.x, v2.x), v3.x);
     float maxX = Math::Max<float>(Math::Max<float>(v1.x, v2.x), v3.x);
@@ -22,7 +26,12 @@ void Draw::DrawTriangle(BitmapBuffer &bitmapBuffer, const Vector3 &v1, const Vec
     EdgeEquation e3(v1, v2);
 
     float area = 0.5f * (e1.c + e2.c + e3.c);
+
+    
+
     BaryCenterCalculator baryCenterCalculator(v1,v2,v3);
+    Vector3 lightDir = DirectionalLight.Normalize().Reverse();
+    float diffuse = Math::Max<float>(normalVector.Dot(lightDir), 0);
 
     for (float x = minX + 0.5f, xm = maxX + 0.5f; x <= xm; x += 1.0f)
         for (float y = minY + 0.5f, ym = maxY + 0.5f; y <= ym; y += 1.0f)
@@ -35,7 +44,10 @@ void Draw::DrawTriangle(BitmapBuffer &bitmapBuffer, const Vector3 &v1, const Vec
                 float r = ((1 - sum) * 255.0f);
                 float g = (baryCenter.first * 255.0f);
                 float b = (baryCenter.second * 255.0f);
-                DWORD color = (a << 24) + ((int)r << 16) + ((int)g << 8) + ((int)b);
+                Vector3 rgb = Vector3(r,g,b);
+                float lightAmount = diffuse + Ambient;
+                rgb = rgb * lightAmount;
+                DWORD color = (a << 24) + ((int)rgb.x << 16) + ((int)rgb.y << 8) + ((int)rgb.z);
                 bitmapBuffer.SetColor(x,y,color);
             }
         }
