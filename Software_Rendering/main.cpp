@@ -29,6 +29,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLin
 	Cube cube;
 	cube.rotation += Vector3(-30,0,0);
 
+	char frameBuffer[10];
+
 	MSG msg;
 	ZeroMemory(&msg, sizeof(msg));
 	while (msg.message != WM_QUIT)
@@ -43,20 +45,16 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLin
 			Time::Update();
 			if (Time::GetDeltaTime() > FPS)
 			{
-				bitmapBuffer.Clear();
 				Time::Frame();
-				char frameBuffer[10];
+				bitmapBuffer.Clear();
 
+				cube.rotation += Vector3(0,60,0) * Time::GetDeltaTime();
 				camera.Update();
 				cube.UpdateTransform(camera);
 				
 				//Draw Start
+				Draw::Update(camera.position);
 				Draw::PrintText(hdc, 5, 5, Time::GetFrameCount(frameBuffer));
-
-				//Vector3 v1 = Vector3(300, 100, 0.5f), v2 = Vector3(100, 100, 0.5f), v3 = Vector3(200, 200, 0.5f);
-				//Draw::DrawTriangle(bitmapBuffer, v1, v2, v3);
-
-				cube.rotation += Vector3(0,60,0) * Time::GetDeltaTime();
 				cube.Draw(bitmapBuffer, camera);
 				//Draw End
 
