@@ -73,6 +73,7 @@ void Cube::Draw(BitmapBuffer &bitmapBuffer, const Camera &camera)
 		Vector3 p2 = deviceCoordinateVertices[indices[i]._2];
 		Vector3 p3 = deviceCoordinateVertices[indices[i]._3];
 
-		Draw::DrawTriangle(bitmapBuffer,p1,p2,p3,normal,v1,v2,v3);
+		PhongShader phongShader = PhongShader(normal,v1,v2,v3);
+		Draw::DrawTriangle(bitmapBuffer,p1,p2,p3,phongShader);
 	}
 }
