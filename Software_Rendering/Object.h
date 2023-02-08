@@ -17,4 +17,9 @@ public:
     std::vector<Vector3> worldCoordinateVertices;
     std::vector<Vector3> deviceCoordinateVertices;
     std::vector<Index> indices;
+    Object();
+    void InitVertexVector();
+    Matrix4x4 GetModelMatrix();
+    void UpdateTransform(const Camera &camera);
+    void Draw(BitmapBuffer &bitmapBuffer, const Camera &camera);
 };
