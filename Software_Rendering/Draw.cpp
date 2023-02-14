@@ -39,8 +39,7 @@ void Draw::DrawTriangle(BitmapBuffer &bitmapBuffer, const Vector3 &v1, const Vec
                 float b = (baryCenter.second);
 
                 Vector3 rgb = Vector3(123.0f / 255.0f,123.0f / 255.0f,123.0f / 255.0f);
-                rgb = rgb * 255;
-                //rgb = phongShader.Calculate(rgb, baryCenter);
+                rgb = phongShader.Calculate(rgb, baryCenter);
                 DWORD color = (a << 24) + ((int)rgb.x << 16) + ((int)rgb.y << 8) + ((int)rgb.z);
                 bitmapBuffer.SetColor(x,y,color);
             }
