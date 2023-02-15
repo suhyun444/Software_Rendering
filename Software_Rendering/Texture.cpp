@@ -4,6 +4,8 @@ Texture::Texture()
 {
 
 }
+// https://online-converting.com/image/convert2bmp/#google_vignette
+//Bitmap converter
 Texture::Texture(std::string name)
 {
     std::string path = "D:\\Winapi\\Software_Rendering\\Software_Rendering\\Texture\\" + name;
