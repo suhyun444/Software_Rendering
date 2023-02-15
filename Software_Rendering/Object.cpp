@@ -6,10 +6,15 @@ Object::Object()
     position = Vector3(0, 0, 0);
     rotation = Vector3(0, 0, 0);
 }
-void Object::SetTexture(Texture texture)
+Object::~Object()
 {
-    this->texture = texture;
-    textureMapping = TextureMapping(texture);
+    delete texture;
+    delete textureMapping;
+}
+void Object::SetTexture(std::string name)
+{
+    this->texture = new Texture(name);
+    this->textureMapping = new TextureMapping(texture);
 }
 void Object::InitVertexVector()
 {
@@ -69,7 +74,7 @@ void Object::Draw(BitmapBuffer &bitmapBuffer, const Camera &camera)
         Vector2 vt2 = textureVertices[textureIndices[i]._2];
         Vector2 vt3 = textureVertices[textureIndices[i]._3];
         PhongShader phongShader = PhongShader(normal, v1, v2, v3);
-        textureMapping.BindUV(vt1,vt2,vt3);
-        Draw::DrawTriangle(bitmapBuffer, p1, p2, p3, phongShader, textureMapping);
+        textureMapping->BindUV(vt1,vt2,vt3);
+        Draw::DrawTriangle(bitmapBuffer, p1, p2, p3, phongShader, *textureMapping);
     }
 }
