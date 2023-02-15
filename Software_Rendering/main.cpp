@@ -27,11 +27,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLin
 	Camera camera = Camera(0.1f, 100, (float)Window::width / (float)Window::height, 70);
 
 	//큐브 생성
-	Object cube = ObjParser::LoadObject("Cube.obj");
-	cube.position = Vector3(-10,0,0);
-	//cube.rotation += Vector3(-30,0,0);
-	Object sphere = ObjParser::LoadObject("Sphere.obj");
+	Object sphere = ObjParser::LoadObject("Sphere.obj","panda.bmp");
 	sphere.scale = Vector3(0.1f,0.1f,0.1f);
+	
 	char frameBuffer[10];
 
 	MSG msg;
@@ -51,17 +49,13 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLin
 				Time::Frame();
 				bitmapBuffer.Clear();
 
-				//cube.rotation += Vector3(-30,60,0) * Time::GetDeltaTime();
-	
 				camera.Update();
 				sphere.UpdateTransform(camera);
-				cube.UpdateTransform(camera);
 
 				//Draw Start
 				Draw::Update(camera.position);
 				Draw::PrintText(hdc, 5, 5, Time::GetFrameCount(frameBuffer));
 				sphere.Draw(bitmapBuffer,camera);
-				cube.Draw(bitmapBuffer, camera);
 				//Draw End
 
 
