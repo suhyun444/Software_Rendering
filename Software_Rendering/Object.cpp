@@ -77,7 +77,11 @@ void Object::Draw(BitmapBuffer &bitmapBuffer, const Camera &camera)
         Vector2 vt2 = textureVertices[textureIndices[i]._2];
         Vector2 vt3 = textureVertices[textureIndices[i]._3];
         PhongShader phongShader = PhongShader(normal, v1, v2, v3);
-        textureMapping->BindUV(vt1,vt2,vt3);
-        Draw::DrawTriangle(bitmapBuffer, p1, p2, p3, zPositionInViewCoordinate[indices[i]._1], zPositionInViewCoordinate[indices[i]._2], zPositionInViewCoordinate[indices[i]._3], phongShader, *textureMapping);
+
+        float z1 = zPositionInViewCoordinate[indices[i]._1];
+        float z2 = zPositionInViewCoordinate[indices[i]._2];
+        float z3 = zPositionInViewCoordinate[indices[i]._3];
+        textureMapping->BindUV(vt1, vt2, vt3, z1, z2, z3);
+        Draw::DrawTriangle(bitmapBuffer, p1, p2, p3, phongShader, *textureMapping);
     }
 }
