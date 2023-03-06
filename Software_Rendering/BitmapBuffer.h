@@ -20,6 +20,7 @@ private:
     HBITMAP oldBit;
 
     BYTE* bits;
+    float* depth;
 public:
     BitmapBuffer(HWND hwnd, int width, int height);
     ~BitmapBuffer();
@@ -27,4 +28,6 @@ public:
     void Clear();
 
     void SetColor(int x,int y,DWORD color);
+    float GetDepth(int x,int y);
+    void SetDepth(int x,int y,float z);
 };

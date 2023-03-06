@@ -37,10 +37,13 @@ void Draw::DrawTriangle(BitmapBuffer &bitmapBuffer, const Vector3 &v1, const Vec
                 float r = ((1 - sum));
                 float g = (baryCenter.first);
                 float b = (baryCenter.second);
-
+                float z = v1.z * r + v2.z * g + v3.z * b;
+                float prevDepth = bitmapBuffer.GetDepth(x,y);
+                if(prevDepth > z) continue;
                 DWORD color = textureMapping.Calcuate(baryCenter);
                 Vector3 rgb = phongShader.Calculate(color, baryCenter);
                 color = (a << 24) + ((int)rgb.x << 16) + ((int)rgb.y << 8) + ((int)rgb.z);
+                bitmapBuffer.SetDepth(x,y,z);
                 bitmapBuffer.SetColor(x,y,color);
             }
         }
