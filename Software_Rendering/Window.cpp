@@ -1,7 +1,7 @@
 #include "Window.h"
 
-int Window::height = 720;
-int Window::width = 1280;
+int Window::width = 720;
+int Window::height = 480;
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {

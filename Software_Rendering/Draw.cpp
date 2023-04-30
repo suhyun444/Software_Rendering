@@ -31,7 +31,11 @@ void Draw::DrawTriangle(BitmapBuffer &bitmapBuffer, const Vector3 &v1, const Vec
             if (e1.CheckInside(x, y) && e2.CheckInside(x, y) && e3.CheckInside(x, y))
             {
                 std::pair<float,float> baryCenter =  baryCenterCalculator.Evaluate(x,y);
-                if(baryCenter.first < 0 || baryCenter.second < 0)std::cout << baryCenter.first << " , " << baryCenter.second << "\n";
+                // if(baryCenter.first < 0 || baryCenter.second < 0)
+                // {
+                //     std::cout << baryCenter.first << " , " << baryCenter.second << "\n";
+                //     continue;
+                // }
                 float sum = baryCenter.first + baryCenter.second;
                 int a = 255;
                 float r = ((1 - sum));
