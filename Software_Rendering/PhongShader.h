@@ -15,6 +15,7 @@ public:
     Vector3 diffuse;
     Vector3 ambient;
     Vector3 reflectDirection;
+    PhongShader();
     PhongShader(Vector3 normalVector, const Vector3& worldPositon1, const Vector3&worldPositon2, const Vector3 &worldPositon3);
     Vector3 Calculate(DWORD color,std::pair<float,float> UV);
 };

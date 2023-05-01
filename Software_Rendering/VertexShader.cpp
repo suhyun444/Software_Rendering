@@ -31,5 +31,9 @@ Output VertexShader::Calculate(Vector3 v[], Vector2 vt[])
      
         output.textureVertex[i] = vt[i];
     }
+    Vector3 s1 = output.worldCoordinateVertex[1] - output.worldCoordinateVertex[0];
+    Vector3 s2 = output.worldCoordinateVertex[2] - output.worldCoordinateVertex[0];
+    Vector3 normal = s1.Cross(s2);
+    output.normal = normal.Normalize();
     return output;
 }
