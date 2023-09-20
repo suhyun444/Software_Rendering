@@ -25,8 +25,8 @@ void Draw::DrawTriangle(BitmapBuffer &bitmapBuffer, const Vector3 &v1, const Vec
     float area = 0.5f * (e1.c + e2.c + e3.c);
 
     BaryCenterCalculator baryCenterCalculator(v1,v2,v3);
-    for (float x = minX + 0.5f, xm = maxX + 0.5f; x <= xm; x += 1.0f)
-        for (float y = minY + 0.5f, ym = maxY + 0.5f; y <= ym; y += 1.0f)
+    for (float x = minX , xm = maxX ; x <= xm; x += 0.5f)
+        for (float y = minY , ym = maxY ; y <= ym; y += 0.5f)
         {
             if (e1.CheckInside(x, y) && e2.CheckInside(x, y) && e3.CheckInside(x, y))
             {
