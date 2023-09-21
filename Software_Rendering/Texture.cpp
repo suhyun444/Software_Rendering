@@ -8,7 +8,7 @@ Texture::Texture()
 //Bitmap converter
 Texture::Texture(std::string name)
 {
-    std::string path = "D:\\Winapi\\Software_Rendering\\Software_Rendering\\Texture\\" + name;
+    std::string path = "Texture\\" + name;
     hBit = (HBITMAP)LoadImageA(NULL, path.c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
     if(GetLastError() == 2)
     {
