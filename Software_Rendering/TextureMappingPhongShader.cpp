@@ -21,6 +21,6 @@ void TextureMappingPhongShader::BindInput(Output output)
 }
 Vector3 TextureMappingPhongShader::Calculate(std::pair<float,float> uv)
 {
-    DWORD color = textureMapping->Calcuate(uv);
+    Vector3 color = textureMapping->Calcuate(uv);
     return phongShader->Calculate(color, uv);
 }

@@ -18,11 +18,13 @@ void TextureMapping::BindUV(const Vector2 &vt1, const Vector2 &vt2, const Vector
     this->invZ2 = 1.0f / z2;
     this->invZ3 = 1.0f / z3;
 }
-DWORD TextureMapping::Calcuate(std::pair<float, float> UV)
+Vector3 TextureMapping::Calcuate(std::pair<float, float> UV)
 {
     float oneMinusST = 1 - UV.first - UV.second;
     float z = invZ1 * oneMinusST + invZ2 * UV.first + invZ3 * UV.second;
     float invZ = 1.0f / z;
     Vector2 position = (vt1 * oneMinusST * invZ1 + vt2 * UV.first * invZ2 + vt3 * UV.second * invZ3) * invZ;
-    return texture->GetPixel(position.x,position.y);
+    DWORD color = texture->GetPixel(position.x,position.y);
+    Vector3 rgb = Vector3(GetBValue(color), GetGValue(color), GetRValue(color));
+    return rgb;
 }
