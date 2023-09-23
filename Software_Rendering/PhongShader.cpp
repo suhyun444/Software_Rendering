@@ -3,6 +3,10 @@
 Vector3 PhongShader::DirectionalLight = Vector3(0.0f, -0.45, 1.0f);
 Vector3 PhongShader::CameraPosition = Vector3(0.0f, 0.0f, 1.0f);
 
+PhongShader::PhongShader()
+{
+    
+}
 PhongShader::PhongShader(Vector3 normalVector, const Vector3 &worldPositon1, const Vector3 &worldPositon2, const Vector3 &worldPositon3)
     : normalVector(normalVector), worldPositon1(worldPositon1), worldPositon2(worldPositon2), worldPositon3(worldPositon3)
 {
