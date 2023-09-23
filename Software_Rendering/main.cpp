@@ -27,6 +27,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLin
 
 	//큐브 생성
 	Cube cube;
+	cube.rotation += Vector3(-30,0,0);
 
 	MSG msg;
 	ZeroMemory(&msg, sizeof(msg));
@@ -52,9 +53,10 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLin
 				//Draw Start
 				Draw::PrintText(hdc, 5, 5, Time::GetFrameCount(frameBuffer));
 
-				Vector3 v1 = Vector3(300, 100, 0.5f), v2 = Vector3(100, 100, 0.5f), v3 = Vector3(200, 200, 0.5f);
-				Draw::DrawTriangle(bitmapBuffer, v1, v2, v3);
+				//Vector3 v1 = Vector3(300, 100, 0.5f), v2 = Vector3(100, 100, 0.5f), v3 = Vector3(200, 200, 0.5f);
+				//Draw::DrawTriangle(bitmapBuffer, v1, v2, v3);
 
+				cube.rotation += Vector3(0,60,0) * Time::GetDeltaTime();
 				cube.Draw(bitmapBuffer, camera);
 				//Draw End
 
