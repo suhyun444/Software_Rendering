@@ -13,8 +13,9 @@ PhongShader::PhongShader(Vector3 normalVector, const Vector3 &worldPositon1, con
     reflectDirection = lightDir.Reverse().Reflect(normalVector);
     reflectDirection = reflectDirection.Normalize();
 }
-Vector3 PhongShader::Calculate(Vector3 rgb, std::pair<float, float> UV)
+Vector3 PhongShader::Calculate(DWORD color, std::pair<float, float> UV)
 {
+    Vector3 rgb = Vector3(GetRValue(color),GetGValue(color),GetBValue(color));
     Vector3 position = worldPositon1 + ((worldPositon2 - worldPositon1) * UV.first) + ((worldPositon3 - worldPositon1) * UV.second);
 
     Vector3 viewDirection = (position - CameraPosition).Normalize();
