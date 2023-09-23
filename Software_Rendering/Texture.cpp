@@ -21,7 +21,6 @@ Texture::Texture(std::string name)
         return;
     }
     GetObject(hBit, sizeof(BITMAP), &bitmap);
-    std::cout << bitmap.bmWidth << " , " << bitmap.bmHeight << "\n";
     BITMAPINFO bmi;
     memset(&bmi, 0, sizeof(BITMAPINFO));
     bmi.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
