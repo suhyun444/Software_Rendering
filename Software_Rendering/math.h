@@ -16,13 +16,15 @@ public:
 	float x, y, z;
 	Vector3();
 	Vector3(float x, float y, float z);
-	Vector3 operator+(const Vector3& v);
+	Vector3 operator+(const Vector3 &v);
 	Vector3 operator-(const Vector3 &v);
 	Vector3 operator+=(const Vector3 &v);
 	Vector3 operator-=(const Vector3 &v);
 	Vector3 operator*(float other);
+	Vector3 operator*(const Vector3 &v);
 	Vector3 Reverse();
 	float Dot(Vector3& v);
+	Vector3 Reflect(Vector3 &v);
 	Vector3 Cross(Vector3& v);
 	Vector3 Normalize();
 };

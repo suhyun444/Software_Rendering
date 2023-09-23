@@ -59,6 +59,10 @@ Vector3 Vector3::operator*(float other)
 {
     return Vector3(x * other,y * other,z * other);
 }
+Vector3 Vector3::operator*(const Vector3& v)
+{
+    return Vector3(x * v.x, y * v.y, z * v.z);
+}
 Vector3 Vector3::Reverse()
 {
     return Vector3(-x,-y,-z);
@@ -75,6 +79,10 @@ Vector3 Vector3::Normalize()
 {
     float length = sqrt((pow(x,2) + pow(y, 2) + pow(z,2)));
     return Vector3(x / length,y / length,z / length); 
+}
+Vector3 Vector3::Reflect(Vector3& v)
+{
+    return *this - (v * 2 * (this->Dot(v)));
 }
 Vector4::Vector4()
 {
