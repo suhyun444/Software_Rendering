@@ -8,17 +8,33 @@ Texture::Texture(std::string name)
 {
     std::string path = "D:\\Winapi\\Software_Rendering\\Software_Rendering\\Texture\\" + name;
     hBit = (HBITMAP)LoadImageA(NULL, path.c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
-
+    if(GetLastError() == 2)
+    {
+        std::cout << "FileNotFound\n";
+        return;
+    }
+    else if(hBit == NULL)
+    {
+        std::cout << "Fail\n";
+        return;
+    }
     GetObject(hBit, sizeof(BITMAP), &bitmap);
+    std::cout << bitmap.bmWidth << " , " << bitmap.bmHeight << "\n";
+    BITMAPINFO bmi;
+    memset(&bmi, 0, sizeof(BITMAPINFO));
+    bmi.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
+    bmi.bmiHeader.biWidth = bitmap.bmWidth;
+    bmi.bmiHeader.biHeight = bitmap.bmHeight;
+    bmi.bmiHeader.biPlanes = 1;
+    bmi.bmiHeader.biBitCount = bitmap.bmBitsPixel;
+    bmi.bmiHeader.biCompression = BI_RGB;
 
     textureHDC = CreateCompatibleDC(NULL);
     oldBit = SelectObject(textureHDC, hBit);
+    
     DWORD pixelsSize = bitmap.bmWidth * bitmap.bmHeight;
     pixels = new DWORD[pixelsSize];
-    //0을 반환한다 error
-    int success = GetDIBits(textureHDC, hBit, 0, bitmap.bmHeight, pixels, (BITMAPINFO *)&bitmap, DIB_RGB_COLORS);
-    std::cout << GetLastError() << "\n";
-    std::cout << success<<"\n";
+    int success = GetDIBits(textureHDC, hBit, 0, bitmap.bmHeight, pixels, &bmi, DIB_RGB_COLORS);
 }
 Texture::~Texture()
 {
