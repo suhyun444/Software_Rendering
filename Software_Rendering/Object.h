@@ -1,9 +1,5 @@
 #pragma once
-#include "math.h"
-#include <Windows.h>
 #include "Camera.h"
-#include "Window.h"
-#include "Time.h"
 #include "Draw.h"
 #include <vector>
 
@@ -19,7 +15,10 @@ public:
     std::vector<Vector2> textureVertices;
     std::vector<Index> indices;
     std::vector<Index> textureIndices;
+    Texture texture;
+    TextureMapping textureMapping;
     Object();
+    void SetTexture(Texture texture);
     void InitVertexVector();
     Matrix4x4 GetModelMatrix();
     void UpdateTransform(const Camera &camera);

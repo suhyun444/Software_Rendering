@@ -6,6 +6,11 @@ Object::Object()
     position = Vector3(0, 0, 0);
     rotation = Vector3(0, 0, 0);
 }
+void Object::SetTexture(Texture texture)
+{
+    this->texture = texture;
+    textureMapping = TextureMapping(texture);
+}
 void Object::InitVertexVector()
 {
     worldCoordinateVertices.resize(vertices.size());
@@ -56,12 +61,15 @@ void Object::Draw(BitmapBuffer &bitmapBuffer, const Camera &camera)
         // back-face culling
         if (DontNeedToDraw(position - camera.position, normal))
             continue;
-
         Vector3 p1 = deviceCoordinateVertices[indices[i]._1];
         Vector3 p2 = deviceCoordinateVertices[indices[i]._2];
         Vector3 p3 = deviceCoordinateVertices[indices[i]._3];
-        
+
+        Vector2 vt1 = textureVertices[textureIndices[i]._1];
+        Vector2 vt2 = textureVertices[textureIndices[i]._2];
+        Vector2 vt3 = textureVertices[textureIndices[i]._3];
         PhongShader phongShader = PhongShader(normal, v1, v2, v3);
-        Draw::DrawTriangle(bitmapBuffer, p1, p2, p3, phongShader);
+        textureMapping.BindUV(vt1,vt2,vt3);
+        Draw::DrawTriangle(bitmapBuffer, p1, p2, p3, phongShader, textureMapping);
     }
 }
