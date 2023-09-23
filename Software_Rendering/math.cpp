@@ -296,7 +296,7 @@ Matrix4x4 Matrix4x4::Rotation(Vector3 rotation)
     Matrix4x4 x = RotationX(rotation.x);
     Matrix4x4 y = RotationY(rotation.y);
     Matrix4x4 z = RotationZ(rotation.z);
-    Matrix4x4 ret = x * y * z;
+    Matrix4x4 ret = z * y * x;
     return ret;
 }
 Matrix4x4 Matrix4x4::Scale(Vector3 scale)
