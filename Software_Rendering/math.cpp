@@ -20,6 +20,10 @@ Vector2 Vector2::operator-(const Vector2 &v)
 {
     return Vector2(x - v.x, y - v.y);
 }
+Vector2 Vector2::operator*(const float other)
+{
+    return Vector2(x * other, y * other);
+}
 float Vector2::Dot(Vector2& v)
 {
     return (x * v.x + y * v.y);

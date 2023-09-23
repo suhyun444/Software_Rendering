@@ -49,6 +49,7 @@ public:
 	Vector2(float x, float y);
 	Vector2 operator+(const Vector2& v);
 	Vector2 operator-(const Vector2 &v);
+	Vector2 operator*(const float other);
 	float Dot(Vector2& v);
 };
 
