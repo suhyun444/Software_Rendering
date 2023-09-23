@@ -33,9 +33,7 @@ void Camera::UpdateViewMatrix()
 void Camera::UpdateProjectionMatrix()
 {
 	float top = nearPlane * tanf(3.1415f / 180 * fov / 2);
-	float bottom = -top;
 	float right = top * aspect;
-	float left = -right;
 	float m11 = nearPlane / right;
 	float m22 = nearPlane / top;
 	float m33 = (farPlane + nearPlane) / (nearPlane - farPlane);
