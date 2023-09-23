@@ -71,6 +71,6 @@ Object ObjParser::LoadObject(std::string objectName, std::string textureName)
         }
     }
     result.InitVertexVector();
-    result.SetTexture(Texture(textureName));
+    result.SetTexture(textureName);
     return result;
 }
