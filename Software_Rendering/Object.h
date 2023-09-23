@@ -2,6 +2,7 @@
 #include "Camera.h"
 #include "Draw.h"
 #include <vector>
+#include "VertexShader.h"
 
 class Object
 {
@@ -16,6 +17,7 @@ public:
     std::vector<Vector2> textureVertices;
     std::vector<Index> indices;
     std::vector<Index> textureIndices;
+    VertexShader vertexShader;
     Texture* texture;
     TextureMapping* textureMapping;
     Object();
