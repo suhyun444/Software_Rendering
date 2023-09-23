@@ -24,6 +24,7 @@ public:
 	Vector3 Reverse();
 	float Dot(Vector3& v);
 	Vector3 Cross(Vector3& v);
+	Vector3 Normalize();
 };
 
 class Vector4
