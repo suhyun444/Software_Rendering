@@ -36,7 +36,7 @@ Index FaceValueToTextureIndex(std::string input1, std::string input2, std::strin
 }
 Object ObjParser::LoadObject(std::string objectName, std::string textureName)
 {
-    std::ifstream fin("D:\\Winapi\\Software_Rendering\\Software_Rendering\\Objects\\" + objectName);
+    std::ifstream fin("Objects\\" + objectName);
     std::string s;
     Object result;
     if(!fin)
