@@ -34,12 +34,13 @@ void Draw::DrawTriangle(BitmapBuffer &bitmapBuffer, const Vector3 &v1, const Vec
                 std::pair<float,float> baryCenter =  baryCenterCalculator.Evaluate(x,y);
                 float sum = baryCenter.first + baryCenter.second;
                 int a = 255;
-                float r = ((1 - sum) * 255.0f);
-                float g = (baryCenter.first * 255.0f);
-                float b = (baryCenter.second * 255.0f);
+                float r = ((1 - sum));
+                float g = (baryCenter.first);
+                float b = (baryCenter.second);
 
                 Vector3 rgb = Vector3(123.0f / 255.0f,123.0f / 255.0f,123.0f / 255.0f);
-                rgb = phongShader.Calculate(rgb, baryCenter);
+                rgb = rgb * 255;
+                //rgb = phongShader.Calculate(rgb, baryCenter);
                 DWORD color = (a << 24) + ((int)rgb.x << 16) + ((int)rgb.y << 8) + ((int)rgb.z);
                 bitmapBuffer.SetColor(x,y,color);
             }
