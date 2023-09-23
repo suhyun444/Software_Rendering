@@ -4,6 +4,7 @@ TextureMappingPhongShader::~TextureMappingPhongShader()
 {
     delete texture;
     delete textureMapping;
+    delete phongShader;
 }
 void TextureMappingPhongShader::SetTexture(std::string name)
 {
