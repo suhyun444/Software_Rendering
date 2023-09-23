@@ -15,10 +15,11 @@ public:
     std::vector<Vector2> textureVertices;
     std::vector<Index> indices;
     std::vector<Index> textureIndices;
-    Texture texture;
-    TextureMapping textureMapping;
+    Texture* texture;
+    TextureMapping* textureMapping;
     Object();
-    void SetTexture(Texture texture);
+    ~Object();
+    void SetTexture(std::string name);
     void InitVertexVector();
     Matrix4x4 GetModelMatrix();
     void UpdateTransform(const Camera &camera);

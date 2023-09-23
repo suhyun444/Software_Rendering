@@ -4,7 +4,7 @@ TextureMapping::TextureMapping()
 {
 
 }
-TextureMapping::TextureMapping(Texture texture) : texture(texture)
+TextureMapping::TextureMapping(Texture* texture) : texture(texture)
 {
     
 }
@@ -18,5 +18,5 @@ void TextureMapping::BindUV(const Vector2 &vt1, const Vector2 &vt2, const Vector
 DWORD TextureMapping::Calcuate(std::pair<float,float> UV)
 {
     Vector2 position = vt1 + ((vt2 - vt1) * UV.first) + ((vt3 - vt1) * UV.second);
-    return texture.GetPixel(position.x,position.y);
+    return texture->GetPixel(position.x,position.y);
 }
