@@ -29,7 +29,12 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLin
 	//큐브 생성
 	Object sphere = ObjParser::LoadObject("Cube.obj", "Brick.bmp");
 	//sphere.scale = Vector3(0.1f,0.1f,0.1f);
-	//sphere.rotation = Vector3(0.0f,0.0f,180.0f);	
+	//sphere.rotation = Vector3(0.0f,0.0f,180.0f);
+
+	Object a = ObjParser::LoadObject("Cube.obj", "Brick.bmp");
+	// sphere.scale = Vector3(0.1f,0.1f,0.1f);
+	// sphere.rotation = Vector3(0.0f,0.0f,180.0f);
+	a.position = Vector3(4.0f,0.0f,0.0f);
 	char frameBuffer[10];
 
 	MSG msg;
@@ -51,11 +56,13 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLin
 
 				camera.Update();
 				sphere.UpdateTransform(camera);
+				a.UpdateTransform(camera);
 
-				//Draw Start
+				// Draw Start
 				Draw::Update(camera.position);
 				Draw::PrintText(hdc, 5, 5, Time::GetFrameCount(frameBuffer));
 				sphere.Draw(bitmapBuffer,camera);
+				a.Draw(bitmapBuffer,camera);
 				//Draw End
 
 
