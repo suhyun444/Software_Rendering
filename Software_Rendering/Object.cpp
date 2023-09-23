@@ -20,6 +20,7 @@ void Object::InitVertexVector()
 {
     worldCoordinateVertices.resize(vertices.size());
     deviceCoordinateVertices.resize(vertices.size());
+    zPositionInViewCoordinate.resize(vertices.size());
 }
 Matrix4x4 Object::GetModelMatrix()
 {
@@ -33,8 +34,10 @@ void Object::UpdateTransform(const Camera &camera)
     {
         Vector4 p = Vector4(vertices[i]);
 
-        Vector4 vWcs = Matrix4x4::GetModelMatrix(scale, rotation, position) * p;
+        Vector4 vWcs = modelMatrix * p;
         worldCoordinateVertices[i] = Vector3(vWcs.x, vWcs.y, vWcs.z);
+        Vector4 vVcs = camera.GetViewMatrix() * vWcs;
+        zPositionInViewCoordinate[i] = vVcs.z;
 
         Vector4 vNdcs = t * p;
         // Clipping coordinate system -> Normalized device coordinate system
@@ -75,6 +78,6 @@ void Object::Draw(BitmapBuffer &bitmapBuffer, const Camera &camera)
         Vector2 vt3 = textureVertices[textureIndices[i]._3];
         PhongShader phongShader = PhongShader(normal, v1, v2, v3);
         textureMapping->BindUV(vt1,vt2,vt3);
-        Draw::DrawTriangle(bitmapBuffer, p1, p2, p3, phongShader, *textureMapping);
+        Draw::DrawTriangle(bitmapBuffer, p1, p2, p3, zPositionInViewCoordinate[indices[i]._1], zPositionInViewCoordinate[indices[i]._2], zPositionInViewCoordinate[indices[i]._3], phongShader, *textureMapping);
     }
 }

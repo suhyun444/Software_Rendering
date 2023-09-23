@@ -11,6 +11,7 @@ public:
     Vector3 position;
     std::vector<Vector3> vertices;
     std::vector<Vector3> worldCoordinateVertices;
+    std::vector<float> zPositionInViewCoordinate;
     std::vector<Vector3> deviceCoordinateVertices;
     std::vector<Vector2> textureVertices;
     std::vector<Index> indices;
