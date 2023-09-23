@@ -11,9 +11,6 @@ Cube::Cube()
 	vertices.push_back(Vector3(1, -1, 1));
 	vertices.push_back(Vector3(1, -1, -1));
 	vertices.push_back(Vector3(-1, -1, -1));
-	
-	worldCoordinateVertices.resize(vertices.size());
-	deviceCoordinateVertices.resize(vertices.size());
 
 	indices.push_back(Index(0, 1, 2)); 
 	indices.push_back(Index(0, 2, 3));
