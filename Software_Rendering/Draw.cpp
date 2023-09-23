@@ -6,7 +6,7 @@ void Draw::PrintText(const HDC &hdc, const int x, const int y, const LPCTSTR &te
 {
     TextOut(hdc,x,y,text,lstrlen(text));
 }
-void Draw::DrawTriangle(BitmapBuffer &bitmapBuffer, const Vector3 &v1, const Vector3 &v2, const Vector3 &v3,float z1,float z2,float z3, PhongShader &phongShader, TextureMapping &textureMapping)
+void Draw::DrawTriangle(BitmapBuffer &bitmapBuffer, const Vector3 &v1, const Vector3 &v2, const Vector3 &v3, PhongShader &phongShader, TextureMapping &textureMapping)
 {
     float minX = Math::Min<float>(Math::Min<float>(v1.x, v2.x), v3.x);
     float maxX = Math::Max<float>(Math::Max<float>(v1.x, v2.x), v3.x);
@@ -23,9 +23,6 @@ void Draw::DrawTriangle(BitmapBuffer &bitmapBuffer, const Vector3 &v1, const Vec
     EdgeEquation e3(v1, v2);
 
     float area = 0.5f * (e1.c + e2.c + e3.c);
-    float invZ0 = 1.0f / z1;
-    float invZ1 = 1.0f / z2;
-    float invZ2 = 1.0f / z3;
 
     BaryCenterCalculator baryCenterCalculator(v1,v2,v3);
     for (float x = minX + 0.5f, xm = maxX + 0.5f; x <= xm; x += 1.0f)
@@ -41,9 +38,7 @@ void Draw::DrawTriangle(BitmapBuffer &bitmapBuffer, const Vector3 &v1, const Vec
                 float g = (baryCenter.first);
                 float b = (baryCenter.second);
 
-                float z = invZ0 * r + invZ1 * g + invZ2 * b;
-                float invZ = 1.0f / z;
-                DWORD color = textureMapping.Calcuate(baryCenter,invZ0,invZ1,invZ2,invZ);
+                DWORD color = textureMapping.Calcuate(baryCenter);
                 Vector3 rgb = phongShader.Calculate(color, baryCenter);
                 color = (a << 24) + ((int)rgb.x << 16) + ((int)rgb.y << 8) + ((int)rgb.z);
                 bitmapBuffer.SetColor(x,y,color);
