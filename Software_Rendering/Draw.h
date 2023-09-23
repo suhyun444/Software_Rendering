@@ -7,6 +7,8 @@
 class Draw
 {
 public:
+    static float Ambient;
+    static Vector3 DirectionalLight;
     static void PrintText(const HDC& hdc,const int x,const int y, const LPCTSTR& text);
-    static void DrawTriangle(BitmapBuffer &bitmapBuffer, const Vector3 &v1, const Vector3 &v2, const Vector3 &v3);
+    static void DrawTriangle(BitmapBuffer &bitmapBuffer, const Vector3 &v1, const Vector3 &v2, const Vector3 &v3, Vector3 normalVector);
 };
