@@ -34,7 +34,7 @@ Index FaceValueToTextureIndex(std::string input1, std::string input2, std::strin
     int zInt = std::stoi(z);
     return Index(xInt - 1, yInt - 1, zInt - 1);
 }
-Object ObjParser::LoadObject(std::string objectName)
+Object ObjParser::LoadObject(std::string objectName, std::string textureName)
 {
     std::ifstream fin("D:\\Winapi\\Software_Rendering\\Software_Rendering\\Objects\\" + objectName);
     std::string s;
@@ -67,8 +67,10 @@ Object ObjParser::LoadObject(std::string objectName)
             Index vertexIndex = FaceValueToVertexIndex(input1, input2, input3);
             Index textureIndex = FaceValueToTextureIndex(input1,input2,input3);
             result.indices.push_back(vertexIndex);
+            result.textureIndices.push_back(textureIndex);
         }
     }
     result.InitVertexVector();
+    result.SetTexture(Texture(textureName));
     return result;
 }
