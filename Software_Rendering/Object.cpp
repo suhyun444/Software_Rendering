@@ -8,10 +8,11 @@ Object::Object()
 }
 Object::~Object()
 {
-
+    delete fragmentShdaer;
 }
 void Object::SetTexture(std::string name)
 {
+    delete fragmentShdaer;
     TextureMappingPhongShader* textureMappingPhongShader = new TextureMappingPhongShader();
     textureMappingPhongShader->SetTexture(name);
     fragmentShdaer = textureMappingPhongShader;
