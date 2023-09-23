@@ -32,7 +32,7 @@ void Draw::DrawTriangle(BitmapBuffer &bitmapBuffer, const Vector3 &v1, const Vec
             {
                 std::pair<float,float> baryCenter =  baryCenterCalculator.Evaluate(x,y);
                 float sum = baryCenter.first + baryCenter.second;
-                int a = 255;
+                int a = 0;
                 float r = ((1 - sum));
                 float g = (baryCenter.first);
                 float b = (baryCenter.second);
