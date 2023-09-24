@@ -34,7 +34,7 @@ Index FaceValueToTextureIndex(std::string input1, std::string input2, std::strin
     int zInt = std::stoi(z);
     return Index(xInt - 1, yInt - 1, zInt - 1);
 }
-Object ObjParser::LoadObject(std::string objectName, std::string textureName)
+Object ObjParser::LoadObject(std::string objectName, std::string textureName,std::string nomalTextureName)
 {
     std::ifstream fin("Objects\\" + objectName);
     std::string s;
@@ -70,6 +70,6 @@ Object ObjParser::LoadObject(std::string objectName, std::string textureName)
             result.textureIndices.push_back(textureIndex);
         }
     }
-    result.SetTexture(textureName);
+    result.SetTexture(textureName, nomalTextureName);
     return result;
 }

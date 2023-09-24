@@ -6,5 +6,5 @@
 class ObjParser
 {
 public:
-    static Object LoadObject(std::string objectName, std::string textureName);
+    static Object LoadObject(std::string objectName, std::string textureName, std::string nomalTextureName);
 };

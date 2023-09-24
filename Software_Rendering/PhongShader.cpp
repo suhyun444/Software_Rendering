@@ -11,14 +11,16 @@ PhongShader::PhongShader(Vector3 normalVector, const Vector3 &worldPositon1, con
     : normalVector(normalVector), worldPositon1(worldPositon1), worldPositon2(worldPositon2), worldPositon3(worldPositon3)
 {
     Vector3 lightDir = DirectionalLight.Normalize().Reverse();
-    float diffuseAmount = Math::Max<float>(normalVector.Dot(lightDir), 0);
-    ambient = GlobalLightColor * Ambient;
-    diffuse = GlobalLightColor * diffuseAmount;
-    reflectDirection = lightDir.Reverse().Reflect(normalVector);
-    reflectDirection = reflectDirection.Normalize();
 }
 Vector3 PhongShader::Calculate(Vector3 color, std::pair<float, float> UV)
 {
+
+    float diffuseAmount = Math::Max<float>(normalVector.Dot(lightDir), 0);
+    Vector3 diffuse = GlobalLightColor * diffuseAmount;
+
+    Vector3 reflectDirection = lightDir.Reverse().Reflect(normalVector);
+    reflectDirection = reflectDirection.Normalize();
+    
     Vector3 position = worldPositon1 + ((worldPositon2 - worldPositon1) * UV.first) + ((worldPositon3 - worldPositon1) * UV.second);
 
     Vector3 viewDirection = (position - CameraPosition).Normalize();
@@ -27,6 +29,7 @@ Vector3 PhongShader::Calculate(Vector3 color, std::pair<float, float> UV)
 
     Vector3 specular = GlobalLightColor * SpecularStrength * spec;
 
+    Vector3 ambient = GlobalLightColor * Ambient;
     Vector3 result = (ambient + diffuse + specular) * color;
     result.x = Math::Min<float>(result.x, 255);
     result.y = Math::Min<float>(result.y, 255);

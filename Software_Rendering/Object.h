@@ -3,7 +3,7 @@
 #include "Draw.h"
 #include <vector>
 #include "VertexShader.h"
-#include "TextureMappingPhongShader.h"
+#include "TextureMappingNormalMappingPhongShader.h"
 
 class Object
 {
@@ -19,7 +19,7 @@ public:
     FragmentShdaer* fragmentShdaer;
     Object();
     ~Object();
-    void SetTexture(std::string name);
+    void SetTexture(std::string textureName, std::string normalTextureName);
     Matrix4x4 GetModelMatrix();
     void UpdateTransform(const Camera &camera);
     void Draw(BitmapBuffer &bitmapBuffer, const Camera &camera);

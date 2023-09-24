@@ -27,11 +27,11 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLin
 	Camera camera = Camera(0.1f, 100, (float)Window::width / (float)Window::height, 70);
 
 	//큐브 생성
-	Object sphere = ObjParser::LoadObject("Sphere.obj", "Brick.bmp");
+	Object sphere = ObjParser::LoadObject("Sphere.obj", "Brick.bmp", "BrickNormal.bmp");
 	sphere.scale = Vector3(0.01f,0.01f,0.01f);
 	//sphere.rotation = Vector3(0.0f,0.0f,180.0f);
 
-	Object a = ObjParser::LoadObject("Cube.obj", "Brick.bmp");
+	Object a = ObjParser::LoadObject("Cube.obj", "Brick.bmp", "BrickNormal.bmp");
 	// sphere.scale = Vector3(0.1f,0.1f,0.1f);
 	// sphere.rotation = Vector3(0.0f,0.0f,180.0f);
 	a.position = Vector3(4.0f,0.0f,0.0f);

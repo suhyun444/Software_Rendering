@@ -10,12 +10,12 @@ Object::~Object()
 {
     delete fragmentShdaer;
 }
-void Object::SetTexture(std::string name)
+void Object::SetTexture(std::string textureName,std::string normalTextureName)
 {
     delete fragmentShdaer;
-    TextureMappingPhongShader* textureMappingPhongShader = new TextureMappingPhongShader();
-    textureMappingPhongShader->SetTexture(name);
-    fragmentShdaer = textureMappingPhongShader;
+    TextureMappingNormalMappingPhongShader *textureMappingNormalMappingPhongShader = new TextureMappingNormalMappingPhongShader();
+    textureMappingNormalMappingPhongShader->SetTexture(textureName, normalTextureName);
+    fragmentShdaer = textureMappingNormalMappingPhongShader;
 }
 Matrix4x4 Object::GetModelMatrix()
 {
