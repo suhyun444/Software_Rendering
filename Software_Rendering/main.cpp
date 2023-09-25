@@ -7,6 +7,7 @@
 #include <iostream>
 #include <algorithm>
 #include "ObjParser.h"
+#include "ObjectHandler.h"
 #pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 
 const float FPS = 1.0f/144.0f;
@@ -25,16 +26,19 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLin
 
 	// 카메라 생성
 	Camera camera = Camera(0.1f, 100, (float)Window::width / (float)Window::height, 70);
+	ObjectHandler objectHandler;
 
 	//큐브 생성
-	Object sphere = ObjParser::LoadObject("Sphere.obj", "Brick.bmp", "BrickNormal.bmp");
-	sphere.scale = Vector3(0.01f,0.01f,0.01f);
-	//sphere.rotation = Vector3(0.0f,0.0f,180.0f);
+	// Object sphere = ObjParser::LoadObject("Sphere.obj", "Brick.bmp", "BrickNormal.bmp");
+	// sphere.scale = Vector3(0.01f,0.01f,0.01f);
+	// //sphere.rotation = Vector3(0.0f,0.0f,180.0f);
 
-	Object a = ObjParser::LoadObject("Cube.obj", "Brick.bmp", "BrickNormal.bmp");
+	Object* a = ObjParser::LoadObject("Cube.obj", "Brick.bmp", "BrickNormal.bmp");
 	// sphere.scale = Vector3(0.1f,0.1f,0.1f);
 	// sphere.rotation = Vector3(0.0f,0.0f,180.0f);
-	a.position = Vector3(4.0f,0.0f,0.0f);
+	a->position = Vector3(4.0f,0.0f,0.0f);
+	a->rotation = Vector3(-30.0f,30.0f,0.0f);
+	objectHandler.AddObject(a);
 	char frameBuffer[10];
 
 	MSG msg;
@@ -55,16 +59,14 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLin
 				bitmapBuffer.Clear();
 
 				camera.Update();
-				sphere.UpdateTransform(camera);
-				a.UpdateTransform(camera);
+				objectHandler.UpdateTransform(camera);
 
 				// Draw Start
 				Draw::Update(camera.position);
 				Draw::PrintText(hdc, 5, 5, Time::GetFrameCount(frameBuffer));
-				sphere.Draw(bitmapBuffer,camera);
-				a.Draw(bitmapBuffer,camera);
+				objectHandler.Draw(bitmapBuffer, camera);
 				//Draw End
-
+				a->rotation.x -= 30.0f * Time::GetDeltaTime();
 
 				bitmapBuffer.Draw();
 			}
