@@ -317,7 +317,25 @@ Matrix4x4 Matrix4x4::GetModelMatrix(Vector3 scale, Vector3 rotation, Vector3 pos
     ret = translateMatrix * rotationMatrix * scaleMatrix;
     return ret;
 }
-
+Matrix3x3::Matrix3x3()
+{
+    this->M11 = 0, this->M12 = 0, this->M13 = 0;
+    this->M21 = 0, this->M22 = 0, this->M23 = 0;
+    this->M31 = 0, this->M32 = 0, this->M33 = 0;
+}
+Matrix3x3::Matrix3x3(float M11, float M12, float M13, float M21, float M22, float M23, float M31, float M32, float M33)
+{
+    this->M11 = M11, this->M12 = M12, this->M13 = M13;
+    this->M21 = M21, this->M22 = M22, this->M23 = M23;
+    this->M31 = M31, this->M32 = M32, this->M33 = M33;
+}
+Vector3 Matrix3x3::operator*(const Vector3 &v)
+{
+    float x = M11 * v.x + M12 * v.y + M13;
+    float y = M21 * v.x + M22 * v.y + M23;
+    float z = M31 * v.x + M32 * v.y + M33;
+    return Vector3(x, y, z);
+}
 Index::Index()
 {
     _1 = 0;

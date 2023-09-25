@@ -79,6 +79,18 @@ public:
 	static Matrix4x4 Scale(Vector3 scale);
 	static Matrix4x4 GetModelMatrix(Vector3 scale, Vector3 rotation, Vector3 position);
 };
+class Matrix3x3
+{
+public:
+	float M11, M12, M13;
+	float M21, M22, M23;
+	float M31, M32, M33;
+	Matrix3x3();
+	Matrix3x3(float M11, float M12, float M13,
+			  float M21, float M22, float M23,
+			  float M31, float M32, float M33);
+	Vector3 operator*(const Vector3 &v);
+};
 
 struct Index
 {
