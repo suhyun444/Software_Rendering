@@ -34,11 +34,11 @@ Index FaceValueToTextureIndex(std::string input1, std::string input2, std::strin
     int zInt = std::stoi(z);
     return Index(xInt - 1, yInt - 1, zInt - 1);
 }
-Object ObjParser::LoadObject(std::string objectName, std::string textureName,std::string nomalTextureName)
+Object* ObjParser::LoadObject(std::string objectName, std::string textureName,std::string nomalTextureName)
 {
     std::ifstream fin("Objects\\" + objectName);
     std::string s;
-    Object result;
+    Object* result = new Object();
     if(!fin)
     {
         std::cout << "not Found\n";
@@ -51,14 +51,14 @@ Object ObjParser::LoadObject(std::string objectName, std::string textureName,std
             float x, y, z;
             fin >> x >> y >> z;
             Vector3 v = Vector3(x, y, z);
-            result.vertices.push_back(v);
+            result->vertices.push_back(v);
         }
         else if(s == "vt")
         {
             float x,y;
             fin >> x >> y;
             Vector2 v = Vector2(x,y);
-            result.textureVertices.push_back(v);
+            result->textureVertices.push_back(v);
         }
         else if(s == "f")
         {
@@ -66,10 +66,10 @@ Object ObjParser::LoadObject(std::string objectName, std::string textureName,std
             fin >> input1 >> input2 >> input3;
             Index vertexIndex = FaceValueToVertexIndex(input1, input2, input3);
             Index textureIndex = FaceValueToTextureIndex(input1,input2,input3);
-            result.indices.push_back(vertexIndex);
-            result.textureIndices.push_back(textureIndex);
+            result->indices.push_back(vertexIndex);
+            result->textureIndices.push_back(textureIndex);
         }
     }
-    result.SetTexture(textureName, nomalTextureName);
+    result->SetTexture(textureName, nomalTextureName);
     return result;
 }
