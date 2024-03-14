@@ -35,5 +35,22 @@ Output VertexShader::Calculate(Vector3 v[], Vector2 vt[])
     Vector3 s2 = output.worldCoordinateVertex[2] - output.worldCoordinateVertex[0];
     Vector3 normal = s1.Cross(s2);
     output.normal = normal.Normalize();
+
+    Vector3 edge1 = output.worldCoordinateVertex[1] - output.worldCoordinateVertex[0];
+    Vector3 edge2 = output.worldCoordinateVertex[2] - output.worldCoordinateVertex[0];
+    Vector2 deltaUV1 = output.textureVertex[1] - output.textureVertex[0];
+    Vector2 deltaUV2 = output.textureVertex[2] - output.textureVertex[0];
+
+    float f = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV2.x * deltaUV1.y);
+
+    output.tangent.x = f * (deltaUV2.y * edge1.x - deltaUV1.y * edge2.x);
+    output.tangent.y = f * (deltaUV2.y * edge1.y - deltaUV1.y * edge2.y);
+    output.tangent.z = f * (deltaUV2.y * edge1.z - deltaUV1.y * edge2.z);
+    output.tangent = output.tangent.Normalize();
+
+    output.binormal.x = f * (-deltaUV2.x * edge1.x + deltaUV1.x * edge2.x);
+    output.binormal.y = f * (-deltaUV2.x * edge1.y + deltaUV1.x * edge2.y);
+    output.binormal.z = f * (-deltaUV2.x * edge1.z + deltaUV1.x * edge2.z);
+    output.binormal = output.binormal.Normalize();
     return output;
 }

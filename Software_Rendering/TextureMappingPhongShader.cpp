@@ -15,12 +15,12 @@ void TextureMappingPhongShader::BindInput(Output output)
 {
     input = output;
     delete phongShader;
-    phongShader = new PhongShader(input.normal, input.worldCoordinateVertex[0], input.worldCoordinateVertex[1], input.worldCoordinateVertex[2]);
+    Vector3 lightDir = PhongShader::DirectionalLight.Normalize().Reverse();
     textureMapping->BindUV(input.textureVertex[0], input.textureVertex[1], input.textureVertex[2],
                            input.zPositionInViewCoordinate[0], input.zPositionInViewCoordinate[1], input.zPositionInViewCoordinate[2]);
 }
 Vector3 TextureMappingPhongShader::Calculate(std::pair<float,float> uv)
 {
     Vector3 color = textureMapping->Calcuate(uv);
-    return phongShader->Calculate(color, uv);
+    //return phongShader->Calculate(color, uv);
 }

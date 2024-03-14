@@ -28,17 +28,15 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLin
 	Camera camera = Camera(0.1f, 100, (float)Window::width / (float)Window::height, 70);
 	ObjectHandler objectHandler;
 
-	//큐브 생성
-	// Object sphere = ObjParser::LoadObject("Sphere.obj", "Brick.bmp", "BrickNormal.bmp");
-	// sphere.scale = Vector3(0.01f,0.01f,0.01f);
-	// //sphere.rotation = Vector3(0.0f,0.0f,180.0f);
+	// 큐브 생성
+	Object *sphere = ObjParser::LoadObject("Sphere.obj", "Fieldstone.bmp", "FieldstoneNormal.bmp");
+	sphere->scale = Vector3(0.03f,0.03f,0.03f);
 
-	Object* a = ObjParser::LoadObject("Cube.obj", "Brick.bmp", "BrickNormal.bmp");
-	// sphere.scale = Vector3(0.1f,0.1f,0.1f);
-	// sphere.rotation = Vector3(0.0f,0.0f,180.0f);
-	a->position = Vector3(4.0f,0.0f,0.0f);
-	a->rotation = Vector3(-30.0f,30.0f,0.0f);
-	objectHandler.AddObject(a);
+	//Object *a = ObjParser::LoadObject("Cube.obj", "Fieldstone.bmp", "FieldstoneNormal.bmp");
+	//a->position = Vector3(4.0f,0.0f,0.0f);
+	//a->rotation = Vector3(-30.0f,30.0f,0.0f);
+	//objectHandler.AddObject(a);
+	objectHandler.AddObject(sphere);
 	char frameBuffer[10];
 
 	MSG msg;
@@ -66,7 +64,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLin
 				Draw::PrintText(hdc, 5, 5, Time::GetFrameCount(frameBuffer));
 				objectHandler.Draw(bitmapBuffer, camera);
 				//Draw End
-				a->rotation.x -= 30.0f * Time::GetDeltaTime();
+				//a->rotation.x -= 30.0f * Time::GetDeltaTime();
 
 				bitmapBuffer.Draw();
 			}

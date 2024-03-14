@@ -9,6 +9,8 @@ struct Output
     Vector3 deviceCoordinateVectex[3];
     Vector2 textureVertex[3];
     Vector3 normal;
+    Vector3 tangent;
+    Vector3 binormal;
 };
 class VertexShader
 {
